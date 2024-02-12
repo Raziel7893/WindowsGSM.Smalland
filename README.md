@@ -11,9 +11,8 @@
 ### Plugin Installation:
 1. Download [latest](https://https://github.com/Raziel7893/WindowsGSM.Smalland/releases/latest) release
 2. Extract then Move the folder **Smalland.cs** folder to **plugins** folder
-3. OR Press on the Puzzle Icon in the left bottom side and install this plugin by navigating to it and select the Zip File.
-4. Click **[RELOAD PLUGINS]** button or restart WindowsGSM
-5. Navigate "Servers" and Click "Install Game Server" and find "Smalland Dedicated Server [Smalland.cs]
+3. Press on the Puzzle Icon in the left bottom side and press **[RELOAD PLUGINS]** or restart WindowsGSM
+
 
 ### Official Documentation
 🗃️ Didn't find any documentation yet. Please Let me know if you came accros one
