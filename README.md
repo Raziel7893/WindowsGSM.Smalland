@@ -6,13 +6,13 @@
 ### WindowsGSM Installation: 
 1. Download  WindowsGSM https://windowsgsm.com/ 
 2. Create a Folder at a Location you wan't all Server to be Installed and Run.
-4. Drag WindowsGSM.Exe into previously created folder and execute it.
+3. Drag WindowsGSM.Exe into previously created folder and execute it.
 
 ### Plugin Installation:
 1. Download [latest](https://https://github.com/Raziel7893/WindowsGSM.Smalland/releases/latest) release
-2. Extract then Move the folder **Smalland.cs** folder to **plugins** folder
-3. Press on the Puzzle Icon in the left bottom side and press **[RELOAD PLUGINS]** or restart WindowsGSM
-
+2. Either Extract then Move the folder **Smalland.cs** to **WindowsGSM/plugins** 
+    1. Press on the Puzzle Icon in the left bottom side and press **[RELOAD PLUGINS]** or restart WindowsGSM
+3. Or Press on the Puzzle Icon in the left bottom side and press **[IMPORT PLUGIN]** and choose the downloaded .zip
 
 ### Official Documentation
 🗃️ Didn't find any documentation yet. Please Let me know if you came accros one
