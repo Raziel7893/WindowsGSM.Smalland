@@ -16,10 +16,10 @@ namespace WindowsGSM.Plugins
         public Plugin Plugin = new Plugin
         {
             name = "WindowsGSM.Smalland", // WindowsGSM.XXXX
-            author = "abarthel",
+            author = "raziel7893",
             description = "WindowsGSM plugin for supporting Smalland Dedicated Server",
             version = "1.0.0",
-            // url = "https://github.com/ohmcodes/WindowsGSM.Smalland", // Github repository link (Best practice) TODO
+            url = "https://github.com/Raziel7893/WindowsGSM.Smalland", // Github repository link (Best practice) TODO
             color = "#34FFeb" // Color Hex
         };
 
