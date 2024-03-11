@@ -30,7 +30,6 @@ namespace WindowsGSM.Plugins
         // - Standard Constructor and properties
         public Smalland(ServerConfig serverData) : base(serverData) => base.serverData = _serverData = serverData;
         private readonly ServerConfig _serverData;
-        public string Error, Notice;
 
 
         // - Game server Fixed variables
@@ -233,42 +232,6 @@ namespace WindowsGSM.Plugins
                 Functions.ServerConsole.SendWaitToMainWindow("^c");
                 p.WaitForExit(2000);
             });
-        }
-        public async Task<Process> Install()
-        {
-            var steamCMD = new Installer.SteamCMD();
-            Process p = await steamCMD.Install(_serverData.ServerID, string.Empty, AppId, true, loginAnonymous);
-            Error = steamCMD.Error;
-            return p;
-        }
-        public async Task<Process> Update(bool validate = false, string custom = null)
-        {
-            var (p, error) = await Installer.SteamCMD.UpdateEx(serverData.ServerID, AppId, validate, custom: custom, loginAnonymous: loginAnonymous);
-            Error = error;
-            await Task.Run(() => { p.WaitForExit(); });
-
-            return p;
-        }
-
-        public bool IsInstallValid()
-        {
-            return File.Exists(ServerPath.GetServersServerFiles(_serverData.ServerID, StartPath));
-        }
-        public bool IsImportValid(string path)
-        {
-            string importPath = Path.Combine(path, StartPath);
-            Error = $"Invalid Path! Fail to find {Path.GetFileName(StartPath)}";
-            return File.Exists(importPath);
-        }
-        public string GetLocalBuild()
-        {
-            var steamCMD = new Installer.SteamCMD();
-            return steamCMD.GetLocalBuild(_serverData.ServerID, AppId);
-        }
-        public async Task<string> GetRemoteBuild()
-        {
-            var steamCMD = new Installer.SteamCMD();
-            return await steamCMD.GetRemoteBuild(AppId);
         }
     }
 }
