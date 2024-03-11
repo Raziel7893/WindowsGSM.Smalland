@@ -27,6 +27,13 @@
 - 7777 UDP - Default
 - 7777 TCP - if you are using 8211 it automatically using 8211 +1 = 8212 for QueryPort so you have to port forward this
 
+### Files To Backup
+- Save Gane (You could only save serverfiles/SMALLAND/Saved , but that includes many big logs)
+  - WindowsGSM\servers\%ID%\serverfiles/SMALLAND/Saved/SaveGames
+  - WindowsGSM\servers\%ID%\serverfiles/SMALLAND/Saved/Config/WindowsServer", backupName="Smalland/Smalland/Saved/Config/WindowsServer
+- WindowsGSM Config
+  - WindowsGSM\servers\%ID%\configs
+
 ### Available Params
 All these params are automatically set by WGSM
 - -port=8211                    can be change and working (Change via WGSM settings)
