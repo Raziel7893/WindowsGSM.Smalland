@@ -230,7 +230,9 @@ namespace WindowsGSM.Plugins
             {
                 Functions.ServerConsole.SetMainWindow(p.MainWindowHandle);
                 Functions.ServerConsole.SendWaitToMainWindow("^c");
-                p.WaitForExit(2000);
+                p.WaitForExit(10000);
+                if(!p.HasExited)
+                    p.Kill();
             });
         }
     }
