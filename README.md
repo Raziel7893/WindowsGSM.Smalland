@@ -23,7 +23,8 @@
 ### Dedicated server info
 🖥️ https://steamdb.info/app/808040/info/
 
-### Port Forwarding
+### Port Forwarding (YOU NEED THIS, TO BE ABLE TO CONNECT FROM THE INTERNET(only for servers/pcs at home):
+- If You don't know How: Google: YourRouterBrand + Portforwarding
 - 7777 UDP - Default
 - 7777 TCP - if you are using 8211 it automatically using 8211 +1 = 8212 for QueryPort so you have to port forward this
 
@@ -92,7 +93,7 @@ For now only Connecting via a the ingame serverbrowser is possible. It is recomm
 [Paypal](https://paypal.me/raziel7893)
 
 ### License
-This project is licensed under the MIT License - see the <a href="https://github.com/ohmcodes/WindowsGSM.Palworld/blob/main/LICENSE">LICENSE.md</a> file for details
+This project is licensed under the MIT License - see the <a href="https://github.com/raziel7893/WindowsGSM.Smalland/blob/main/LICENSE">LICENSE.md</a> file for details
 
 ### Thanks
 Thanks to ohmcodes for the Enshrouded and Palworld Plugins which i used for guidance to create this one
