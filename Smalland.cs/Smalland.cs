@@ -195,7 +195,7 @@ namespace WindowsGSM.Plugins
             };
 
             // Set up Redirect Input and Output to WindowsGSM Console if EmbedConsole is on
-            if (AllowsEmbedConsole)
+            if (_serverData.EmbedConsole)
             {
                 p.StartInfo.RedirectStandardInput = true;
                 p.StartInfo.RedirectStandardOutput = true;
@@ -209,7 +209,7 @@ namespace WindowsGSM.Plugins
             try
             {
                 p.Start();
-                if (AllowsEmbedConsole)
+                if (_serverData.EmbedConsole)
                 {
                     p.BeginOutputReadLine();
                     p.BeginErrorReadLine();
