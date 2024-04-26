@@ -184,11 +184,11 @@ namespace WindowsGSM.Plugins
             {
                 StartInfo =
                 {
-                    CreateNoWindow = true,  //wird komplett ignoriert?!?
+                    CreateNoWindow = false,
                     WorkingDirectory = ServerPath.GetServersServerFiles(_serverData.ServerID),
                     FileName = shipExePath,
                     Arguments = sb.ToString(),
-                    WindowStyle = ProcessWindowStyle.Hidden,  //wird komplett ignoriert?!?
+                    WindowStyle = ProcessWindowStyle.Minimized, 
                     UseShellExecute = false
                 },
                 EnableRaisingEvents = true
@@ -200,6 +200,8 @@ namespace WindowsGSM.Plugins
                 p.StartInfo.RedirectStandardInput = true;
                 p.StartInfo.RedirectStandardOutput = true;
                 p.StartInfo.RedirectStandardError = true;
+                p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                p.StartInfo.CreateNoWindow = true;
                 var serverConsole = new ServerConsole(_serverData.ServerID);
                 p.OutputDataReceived += serverConsole.AddOutput;
                 p.ErrorDataReceived += serverConsole.AddOutput;
