@@ -74,7 +74,16 @@ For now only Connecting via a the ingame serverbrowser is possible. It is recomm
 ### Other notes
 - The game is currently in Early Access Stage WGSM and this plugin is not taking liability if something happens to your server, the app is only for managing your server easily
 
-### How can you play with your friends without port forwarding?
+### Not having an full IPv4 adress ( named CCNAT or DSL Light )
+No game or gameserver supports ipv6 only connections. 
+- You need to either buy one (most VPN services provide that option. A pal uses ovpn.net for his server, I know of nordvpn also providing that. Should both cost around 7€ cheaper half of it, if your already having an VPN)
+- Or you pay a bit more for your internet and take a contract with full ipv4. (depending on your country)
+- There are also tunneling methods, which require acces to a server with a full ipv4. Some small VPS can be obtained, not powerfull enough for the servers themself, but only for forwarding. I think there are some for under 5€), the connection is then done via wireguard. but its a bit configuration heavy to setup) 
+
+Or you connect your friends via VPN to your net and play via local lan then.
+Many windowsgsm plugin creators recommend zerotier (should be a free VPN designated for gaming) , see chapter below (or tailscale, but no howto there)
+
+## How can you play with your friends without port forwarding?
 - Use [zerotier](https://www.zerotier.com/) folow the basic guide and create network
 - Download the client app and join to your network
 - Create static IP address for your host machine
