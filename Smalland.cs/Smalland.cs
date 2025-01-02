@@ -28,9 +28,7 @@ namespace WindowsGSM.Plugins
         public override string AppId => "808040"; // Game server appId Steam
 
         // - Standard Constructor and properties
-        public Smalland(ServerConfig serverData) : base(serverData) => base.serverData = _serverData = serverData;
-        private readonly ServerConfig _serverData;
-
+        public Smalland(ServerConfig serverData) : base(serverData) => base.serverData = serverData;
 
         // - Game server Fixed variables
         //public override string StartPath => "SMALLANDServer.exe"; // Game server start path
@@ -61,7 +59,7 @@ namespace WindowsGSM.Plugins
             public bool FriendlyFire = false;
             public bool PeacefullMode = false;
             public bool KeepInventory = false;
-            public bool NoDeterioration= false;
+            public bool NoDeterioration = false;
             public bool Private = false;
             public int LengthOfDaySeconds = 1800;
             public int LengthOfSeasonSeconds = 10800;
@@ -71,7 +69,7 @@ namespace WindowsGSM.Plugins
             public int FalldamageModifier = 100;
 
 
-            public string DeploymentId= "";
+            public string DeploymentId = "";
             public string ClientId = "";
             public string ClientSecret = "";
             public string PrivateKey = "";
@@ -101,7 +99,7 @@ namespace WindowsGSM.Plugins
             string jsonContent = JsonConvert.SerializeObject(config, Formatting.Indented);
 
             // Specify the file path
-            string filePath = Functions.ServerPath.GetServersServerFiles(_serverData.ServerID, ConfigFile);
+            string filePath = Functions.ServerPath.GetServersServerFiles(serverData.ServerID, ConfigFile);
 
             // Write the JSON content to the file
             File.WriteAllText(filePath, jsonContent);
@@ -109,7 +107,7 @@ namespace WindowsGSM.Plugins
 
         private void ReadEngineKeys(SmallandConfig config)
         {
-            string shipScript = Functions.ServerPath.GetServersServerFiles(_serverData.ServerID, StartScript);
+            string shipScript = Functions.ServerPath.GetServersServerFiles(serverData.ServerID, StartScript);
             if (!File.Exists(shipScript))
             {
                 Error = "shipped start-server.bat not found, cant read Engine:[EpicOnlineServices] values, trying without";
@@ -134,14 +132,14 @@ namespace WindowsGSM.Plugins
         // - Start server function, return its Process to WindowsGSM
         public async Task<Process> Start()
         {
-            string shipExePath = Functions.ServerPath.GetServersServerFiles(_serverData.ServerID, StartPath);
+            string shipExePath = Functions.ServerPath.GetServersServerFiles(serverData.ServerID, StartPath);
             if (!File.Exists(shipExePath))
             {
                 Error = $"{Path.GetFileName(shipExePath)} not found ({shipExePath})";
                 return null;
             }
 
-            string configPath = Functions.ServerPath.GetServersServerFiles(_serverData.ServerID, ConfigFile);
+            string configPath = Functions.ServerPath.GetServersServerFiles(serverData.ServerID, ConfigFile);
             if (!File.Exists(configPath))
             {
                 Error = $"{configPath} not found";
@@ -153,7 +151,7 @@ namespace WindowsGSM.Plugins
             //Try gather a password from the gui
 
             StringBuilder sb = new StringBuilder();
-            sb.Append($"/Game/Maps/WorldGame/WorldGame_Smalland?SERVERNAME=\"{_serverData.ServerName}\"?WORLDNAME=\"{_serverData.ServerMap}\"");
+            sb.Append($"/Game/Maps/WorldGame/WorldGame_Smalland?SERVERNAME=\"{serverData.ServerName}\"?WORLDNAME=\"{serverData.ServerMap}\"");
             if (!string.IsNullOrWhiteSpace(config.Password)) sb.Append($"?PASSWORD=\"{config.Password}\"");
             if (config.FriendlyFire) sb.Append("?FRIENDLYFIRE");
             if (config.PeacefullMode) sb.Append("?PEACEFULMODE");
@@ -166,8 +164,8 @@ namespace WindowsGSM.Plugins
             sb.Append($"?creaturedamagemodifier={config.CreatureDamageModifier}");
             sb.Append($"?nourishmentlossmodifier={config.NourishmentLossModifier}");
             sb.Append($"?falldamagemodifier={config.FalldamageModifier}");
-            
-            if(!string.IsNullOrEmpty(config.DeploymentId) || !string.IsNullOrEmpty(config.ClientId) || !string.IsNullOrEmpty(config.ClientSecret))
+
+            if (!string.IsNullOrEmpty(config.DeploymentId) || !string.IsNullOrEmpty(config.ClientId) || !string.IsNullOrEmpty(config.ClientSecret))
             {
                 ReadEngineKeys(config);
             }
@@ -177,7 +175,7 @@ namespace WindowsGSM.Plugins
             sb.Append($" -ini:Engine:[EpicOnlineServices]:DedicatedServerClientSecret={config.ClientSecret}");
             if (!string.IsNullOrWhiteSpace(config.PrivateKey)) sb.Append($" -ini:Engine:[EpicOnlineServices]:DedicatedServerPrivateKey={config.PrivateKey}");
 
-            sb.Append($" -port={_serverData.ServerPort} {Additional}");
+            sb.Append($" -port={serverData.ServerPort} {Additional}");
 
             // Prepare Process
             var p = new Process
@@ -185,24 +183,24 @@ namespace WindowsGSM.Plugins
                 StartInfo =
                 {
                     CreateNoWindow = false,
-                    WorkingDirectory = ServerPath.GetServersServerFiles(_serverData.ServerID),
+                    WorkingDirectory = ServerPath.GetServersServerFiles(serverData.ServerID),
                     FileName = shipExePath,
                     Arguments = sb.ToString(),
-                    WindowStyle = ProcessWindowStyle.Minimized, 
+                    WindowStyle = ProcessWindowStyle.Minimized,
                     UseShellExecute = false
                 },
                 EnableRaisingEvents = true
             };
 
             // Set up Redirect Input and Output to WindowsGSM Console if EmbedConsole is on
-            if (_serverData.EmbedConsole)
+            if (serverData.EmbedConsole)
             {
                 p.StartInfo.RedirectStandardInput = true;
                 p.StartInfo.RedirectStandardOutput = true;
                 p.StartInfo.RedirectStandardError = true;
                 p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 p.StartInfo.CreateNoWindow = true;
-                var serverConsole = new ServerConsole(_serverData.ServerID);
+                var serverConsole = new ServerConsole(serverData.ServerID);
                 p.OutputDataReceived += serverConsole.AddOutput;
                 p.ErrorDataReceived += serverConsole.AddOutput;
             }
@@ -211,7 +209,7 @@ namespace WindowsGSM.Plugins
             try
             {
                 p.Start();
-                if (_serverData.EmbedConsole)
+                if (serverData.EmbedConsole)
                 {
                     p.BeginOutputReadLine();
                     p.BeginErrorReadLine();
@@ -233,7 +231,7 @@ namespace WindowsGSM.Plugins
                 Functions.ServerConsole.SetMainWindow(p.MainWindowHandle);
                 Functions.ServerConsole.SendWaitToMainWindow("^c");
                 p.WaitForExit(10000);
-                if(!p.HasExited)
+                if (!p.HasExited)
                     p.Kill();
             });
         }
