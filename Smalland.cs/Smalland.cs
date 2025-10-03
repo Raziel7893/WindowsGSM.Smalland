@@ -175,7 +175,7 @@ namespace WindowsGSM.Plugins
             sb.Append($" -ini:Engine:[EpicOnlineServices]:DedicatedServerClientSecret={config.ClientSecret}");
             if (!string.IsNullOrWhiteSpace(config.PrivateKey)) sb.Append($" -ini:Engine:[EpicOnlineServices]:DedicatedServerPrivateKey={config.PrivateKey}");
 
-            sb.Append($" -port={serverData.ServerPort} {Additional}");
+            sb.Append($" -port={serverData.ServerPort} {serverData.ServerParam}");
 
             // Prepare Process
             var p = new Process
